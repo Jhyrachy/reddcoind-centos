@@ -10,7 +10,7 @@ DEFS=-DUSE_IPV6 -DBOOST_SPIRIT_THREADSAFE -DNOPCH
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
 LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
-DEPSDIR=/home/kjj/Dogecoin/Deps
+DEPSDIR=/home/kjj/Reddcoin/Deps
 INCLUDEPATHS= -I"$(DEPSDIR)/include"
 LIBPATHS= -L"$(DEPSDIR)/lib"
 BOOST_LIB_SUFFIX=.a
@@ -141,7 +141,7 @@ OBJS= \
     json/json_spirit_value.o
 
 
-all: dogecoind
+all: reddcoind
 #
 # LevelDB support
 #
@@ -175,7 +175,7 @@ obj/%.o: %.cpp
 		-e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 		rm -f $(@:%.o=%.d)
 
-dogecoind: $(OBJS:obj/%=obj/%)
+reddcoind: $(OBJS:obj/%=obj/%)
 	$(CXX) $(xCXXFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
@@ -187,11 +187,11 @@ obj-test/%.o: test/%.cpp
 			-e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 			rm -f $(@:%.o=%.d)
 
-test_dogecoin: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
+test_reddcoin: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 	$(CXX) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ -Wl,-B$(LMODE) -lboost_unit_test_framework $(xLDFLAGS) $(LIBS)
 
 clean:
-	-rm -f dogecoind test_dogecoin
+	-rm -f reddcoind test_reddcoin
 	-rm -f obj/*.o
 	-rm -f obj-test/*.o
 	-rm -f obj/*.P
