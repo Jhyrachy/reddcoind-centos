@@ -14,6 +14,12 @@ mkdir Trunk
 mkdir Deps
 cd Libraries
 
+wget http://leveldb.googlecode.com/files/leveldb-1.15.0.tar.gz
+tar zxvf leveldb-1.15.0.tar.gz
+cd leveldb-1.15.0
+make
+cd ..
+
 wget -qO- http://downloads.sourceforge.net/boost/boost_1_55_0.tar.bz2 | tar xjv
 cd boost_1_55_0
 ./bootstrap.sh
