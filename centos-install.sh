@@ -47,7 +47,7 @@ cd ../..
 
 mkdir reddcoin-master
 cd reddcoin-master
-wget -qO- https://github.com/reddcoin/reddcoin/tarball/master --no-check-certificate | tar xzv --strip-components 1
+wget -qO- https://github.com/reddcoin-project/reddcoin/tarball/master --no-check-certificate | tar xzv --strip-components 1
 cd src
 #cp -vap ~$USERNAME/makefile.new .
 cat /home/$USERNAME/makefile.new | sed s/kjj/$USERNAME/g > makefile.new
